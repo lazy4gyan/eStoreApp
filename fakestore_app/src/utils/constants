@@ -1,0 +1,51 @@
+export const BASEURL = `https://fakestoreapi.com`;
+
+export const CAROUSEL_DATA = [
+  {
+    title: "electronics",
+    src: "../assets/electronics.png",
+    alt: "Electronics",
+  },
+  {
+    title: "jewelery",
+    src: "../assets/jwellery.png",
+    alt: "Jwellery",
+  },
+  {
+    title: "men's clothing",
+    src: "../assets/mens_clothing.png",
+    alt: "Men's clothing",
+  },
+  {
+    title: "women's clothing",
+    src: "../assets/womens_clothing.png",
+    alt: "Women's clothing",
+  },
+];
+
+export const CATEGORIES = [
+  {
+    id: "electronics",
+    title: "electronics",
+    src: "../assets/el.png",
+    alt: "Electronics",
+  },
+  {
+    id: "jewelery",
+    title: "jewelery",
+    src: "../assets/jwellery.png",
+    alt: "Jwellery",
+  },
+  {
+    id: "men's clothing",
+    title: "men's",
+    src: "../assets/mf.png",
+    alt: "Men's clothing",
+  },
+  {
+    id: "women's clothing",
+    title: "women's",
+    src: "../assets/wf.png",
+    alt: "Women's clothing",
+  },
+];
