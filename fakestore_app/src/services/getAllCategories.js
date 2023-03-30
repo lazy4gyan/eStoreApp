@@ -7,6 +7,5 @@ function getAllCategories() {
         return data;
       });
   }
-  // 'https://fakestoreapi.com/products/category/jewelery
   
   export default getAllCategories;

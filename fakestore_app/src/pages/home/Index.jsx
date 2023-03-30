@@ -5,8 +5,8 @@ import NavbarComponent from "../../components/navbar-component/Index";
 import ProductList from "../../components/productlist-component/Index";
 import { GlobalContext } from "../../provider/Index";
 import Footer from "../../components/footer/Index";
-import "./style.css";
 import Products from "../../components/products/Index";
+import "./style.css";
 
 const Home = () => {
   const globalStore = useContext(GlobalContext);
@@ -15,29 +15,45 @@ const Home = () => {
   return (
     <article>
       <NavbarComponent />
-      <CategoryComponent />
-      {selectedProduct.length > 0 ? (
-        <Products selectedProduct={selectedProduct} />
-      ) : (
+      {globalStore.isLoading ?
+      (
+        <section className="loading--container">
+          <p className="loading">Loading...</p>
+        </section>
+      ) : 
+      globalStore.errorMessage ?
+      (
+        <section>
+          <p style={{color:"red", fontSize:35,display:"flex",justifyContent:"center",alignItems:"center",height:"80vh"}}>
+            {globalStore.errorMessage}
+          </p>
+        </section>
+      ):(
         <>
-          <CarouselComponent />
-          {categoryList.length > 0 ? (
-            categoryList.map((category) => {
-              return (
-                <section key={category} className="category--list">
-                  <h2 className="category--heading">{category}</h2>
-                  <ProductList category={category} />
-                </section>
-              );
-            })
+          <CategoryComponent />
+          {selectedProduct.length > 0 ? (
+            <Products selectedProduct={selectedProduct} />
           ) : (
-            <section className="loading--container">
-              <p className="loading">Loading ...</p>
-            </section>
+            <>
+              <CarouselComponent />
+              {categoryList.length > 0 ? (
+                categoryList.map((category) => {
+                  return (
+                    <section key={category} className="category--list">
+                      <h2 className="category--heading">{category}</h2>
+                      <ProductList category={category} />
+                    </section>
+                  );
+                })
+              ) : (
+                <section className="loading--container">
+                  <p className="loading">Loading...</p>
+                </section>
+              )}
+            </>
           )}
         </>
       )}
-
       <Footer />
     </article>
   );

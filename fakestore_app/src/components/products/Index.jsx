@@ -7,10 +7,10 @@ const Products = ({ selectedProduct }) => {
   const globalStore = useContext(GlobalContext);
   const addToCartHandler = globalStore.addToCartHandler;
   const handleChange = globalStore.handleCartChange;
-
+  const searchResult = globalStore.searchResult;
   const cartItems = globalStore.cart;
 
-  const products = selectedProduct ? selectedProduct : globalStore.productData;
+  const products = selectedProduct ? selectedProduct :searchResult.length > 0 ? searchResult : globalStore.productData;
 
   const renderProductCard = products.map((product) => {
     const present = cartItems.find((x) => x.id === product.id)?.amount;

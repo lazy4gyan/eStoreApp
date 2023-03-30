@@ -22,6 +22,10 @@
   height: 300px;
 }
 
+.card--image:hover {
+  scale: 1.1;
+}
+
 .card--rating {
   background-color: green;
   padding: 0.2rem 0.4rem;
@@ -63,9 +67,12 @@
 .btn {
   width: 120px;
   background-color: orange;
-  border:none;
+  border: none;
 }
-
+.btn:hover {
+  width: 120px;
+  background-color: orange;
+}
 .cart_card-qtyDisplay {
   display: inline-flex;
   justify-content: space-between;

@@ -16,37 +16,46 @@ function getWindowDimensions() {
 
 export const GlobalProvider = ({ children }) => {
   const [productData, setProductData] = useState([]);
-  const [productCategories, setProductCategories] = useState([])
-  const [jweleryData,setJweleryData] = useState([])
-  const [electronicsData,setElectronicsData]= useState([])
+  const [productCategories, setProductCategories] = useState([]);
+  const [jweleryData, setJweleryData] = useState([]);
+  const [electronicsData, setElectronicsData] = useState([]);
+  const [searchedText, setSearchedText] = useState("");
   const [cart, setCart] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showCategory,setShowCategory] = useState("");
-  const [checkHome, setCheckHome] = useState(false)
+  const [showCategory, setShowCategory] = useState("");
+  const [checkHome, setCheckHome] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
   );
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true)
-        const [getProducts, getJweleryList, getElectronicsList, getProductCategories] = await Promise.all([
+        const [
+          getProducts,
+          getJweleryList,
+          getElectronicsList,
+          getProductCategories,
+        ] = await Promise.all([
           getAllProducts(),
           getElectronics(),
           getJweleries(),
-          getAllCategories()
+          getAllCategories(),
         ]);
         setProductData(getProducts);
         setJweleryData(getJweleryList);
         setElectronicsData(getElectronicsList);
         setProductCategories(getProductCategories);
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setErrorMessage(err.message);
+        setIsLoading(false);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -59,11 +68,17 @@ export const GlobalProvider = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // console.log(windowDimensions)
+  const searchResult = productData.filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchedText.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchedText.toLowerCase())
+  );
 
-  const filteredData = !checkHome && productData.filter((product)=>{
-    return product.category === showCategory
-  })
+  const filteredData =
+    !checkHome &&
+    productData.filter((product) => {
+      return product.category === showCategory;
+    });
 
   const addToCartHandler = (item) => {
     if (cart.some((cartItem) => cartItem.id === item.id)) {
@@ -104,8 +119,6 @@ export const GlobalProvider = ({ children }) => {
     setCart(newList);
   };
 
-  console.log(cart)
-
 
   return (
     <GlobalContext.Provider
@@ -121,8 +134,11 @@ export const GlobalProvider = ({ children }) => {
         addToCartHandler,
         handleCartChange,
         handleCartItemDelete,
+        setSearchedText,
+        errorMessage,
+        searchResult,
         filteredData,
-        isLoading
+        isLoading,
       }}
     >
       {children}
