@@ -5,7 +5,7 @@ import { CAROUSEL_DATA } from '../../utils/constants';
   
   function CarouselComponent() {
     return (
-      <Carousel>
+      <Carousel nextLabel={false} prevLabel={false}>
         {CAROUSEL_DATA.map((item, index) => (
           <CarouselItem key={index}>
             <img className="d-block w-100" src={item.src} alt={item.alt} style={{height:"70vh"}} />
