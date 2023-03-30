@@ -1,8 +1,12 @@
 import { useContext } from "react";
+// import { useHistory } from 'react-router-dom';
+
 import { GlobalContext } from "../../provider/Index";
 import "./style.css";
 
 export default function Cart() {
+  // const history = useHistory();
+
   const globalStore = useContext(GlobalContext);
   const handleDelete = globalStore.handleCartItemDelete;
   const handleChange = globalStore.handleCartChange;
@@ -13,6 +17,10 @@ export default function Cart() {
     (total, product) => total + product.amount * product.price,
     0
   );
+
+  const handleClick = () => {
+    history.push('/order');
+  }
 
   const renderCart = cartItems.map((product, index) => {
     const productLimitExceeds = () =>
@@ -50,12 +58,14 @@ export default function Cart() {
       {renderCart.length > 0 ? (
         <>
           {renderCart}
-          <div>
+          <div style={{display:"flex",flexDirection:"column"}}>
             <span style={{fontSize:"20px",fontWeight:"500", marginBottom:"2rem"}}>Total : &#8377; {totalPrice}</span>
+
+            {/* <button onClick={handleClick}>Complete Payment</button> */}
           </div>
         </>
       ) : (
-        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"80vh"}}>
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"60vh"}}>
           Your cart is empty !
         </div>
       )}

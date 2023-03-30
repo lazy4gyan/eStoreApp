@@ -4,6 +4,7 @@ import './App.css'
 import Home from './pages/home/Index';
 import CartPage from "./pages/cart/Index";
 import ProductPage from "./pages/product/Index";
+import OrderSuccess from "./pages/order/Index";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/order" element={<OrderSuccess />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Router>

@@ -43,7 +43,7 @@
 .delete_btn:hover {
   background-color: hsl(0, 0%, 100%);
   color: orangered;
-  border:1px solid orangered;
+  border: 1px solid orangered;
   scale: 1.1;
 }
 
@@ -65,7 +65,7 @@
   cursor: pointer;
   background-color: orange;
   color: hsl(0, 0%, 0%);
-  border:none;
+  border: none;
 }
 
 .plus_btn:hover,
@@ -83,28 +83,18 @@
 
 @media screen and (max-width: 699px) {
   .cart_card-container {
-    /* width: 75%;
-    border: 2px;
-    border-style: groove groove groove none;
-    border-left: 2px solid rgb(23, 133, 242);
-    align-items: center;
-    padding: 1rem 2rem;
-    margin: 1rem 0; */
     display: flex;
     flex-direction: column;
   }
   .cart_card-image {
-    width: 40%;
+    width: 50%;
   }
 
   .delete_btn {
-    /* padding: 0.5rem 1.5rem;
-    background-color: orangered;
-    border: none;
-    color: hsl(0, 0%, 100%);
-    cursor: pointer; */
     margin-top: 1rem;
   }
+  .cart_card-quantity_container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
-
-
